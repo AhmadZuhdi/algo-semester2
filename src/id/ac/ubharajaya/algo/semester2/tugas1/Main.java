@@ -1,5 +1,8 @@
 package id.ac.ubharajaya.algo.semester2.tugas1;
 
+/**
+ * @link https://www.cs.usfca.edu/~galles/visualization/BST.html
+ */
 public class Main {
 
     public static void main(String[] args) {
