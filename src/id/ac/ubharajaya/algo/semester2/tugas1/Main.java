@@ -153,7 +153,6 @@ class BST {
         Node tempParentNode = root;
         boolean ketemu = false;
 
-        // cari nilai yang mau kita apus di dalem binary tree
         while (tempNode != null && !ketemu) {
 
             if (i < tempNode.data) {
@@ -169,23 +168,43 @@ class BST {
 
         if (ketemu) {
 
-            Node leftNode = tempNode.left;
-            Node rightNode = tempNode.right;
+            Node highestNodeOnLeft = tempNode.left;
+            Node parentHighestNodeOnLeft = tempParentNode;
+            boolean foundHighest = false;
+            boolean isRoot = false;
 
-            if (tempParentNode.left != null && tempParentNode.left.data == i) {
-                tempParentNode.left = null;
-            } else if (tempParentNode.right != null && tempParentNode.right.data == i) {
-                tempParentNode.right = null;
-            } else if (root.data == i) {
-                root = null;
+            if (root.data == i) {
+                foundHighest = true;
+                isRoot = true;
             }
 
-            if (leftNode != null) {
-                insertNode(leftNode);
+            while (!foundHighest) {
+                if (highestNodeOnLeft.right != null) {
+                    parentHighestNodeOnLeft = highestNodeOnLeft;
+                    highestNodeOnLeft = highestNodeOnLeft.right;
+                } else {
+                    foundHighest = true;
+                }
             }
 
-            if (rightNode != null) {
-                insertNode(rightNode);
+            if (highestNodeOnLeft.left != null || highestNodeOnLeft.right != null) {
+
+                tempParentNode.right = highestNodeOnLeft;
+            } else {
+
+
+                if (isRoot) {
+                    tempParentNode.data = highestNodeOnLeft.data;
+                } else {
+                    tempParentNode.right.data = highestNodeOnLeft.data;
+                }
+
+                if (parentHighestNodeOnLeft.right != null && parentHighestNodeOnLeft.right.data == highestNodeOnLeft.data) {
+                    parentHighestNodeOnLeft.right = null;
+                } else if (parentHighestNodeOnLeft.left != null && parentHighestNodeOnLeft.left.data == highestNodeOnLeft.data) {
+                    parentHighestNodeOnLeft.left = null;
+                }
+
             }
 
             System.out.println("Nilai " + i + " telah di hapus dari tree");
