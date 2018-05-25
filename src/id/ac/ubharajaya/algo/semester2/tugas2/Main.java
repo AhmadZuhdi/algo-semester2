@@ -1,7 +1,7 @@
 package id.ac.ubharajaya.algo.semester2.tugas2;
 
 /**
- * @link https://www.cs.usfca.edu/~galles/visualization/BST.html
+     * @link https://www.cs.usfca.edu/~galles/visualization/BST.html
  */
 public class Main {
 
@@ -21,6 +21,12 @@ public class Main {
         root1.delete(2);
         root1.checkRoot();
         root1.urutRoot();
+
+        int[] array1 = new int[]{5, 3, 7, 10, 2, 8, 15, 11, 12, 1};
+        BST root2 = new BST(array1);
+
+        int[] array2 = new int[]{18, 19, 1, 2, 8, 7, 6, 10, 11, 12, 4, 3, 22, 25, 13, 14, 7, 4, 5, 1, 6};
+        BST root3 = new BST(array2);
     }
 }
 
@@ -37,6 +43,16 @@ class Node {
 
 class BST {
     private Node root;
+
+    public BST(int[] tree) {
+        for (int i = 0; i < tree.length; i++) {
+            this.insert(tree[i]);
+        }
+    }
+
+    public BST() {
+
+    }
 
     public void checkRoot() {
         System.out.println("Nilai Root: " + root.data);
